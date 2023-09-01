@@ -41,7 +41,7 @@ namespace winFormTut3
                 {
                     int randomNumber = random.Next(icons.Count);
                     iconLabel.Text = icons[randomNumber]; // assigns one of the icons list items to the Text property of the label
-                    // iconLabel.ForeColor = iconLabel.BackColor; // hides the icons
+                    iconLabel.ForeColor = iconLabel.BackColor; // hides the icons
                     icons.RemoveAt(randomNumber); // removes the icon that has been added to the form from the list
                 }
             }
@@ -58,9 +58,25 @@ namespace winFormTut3
 
         }
 
+        /// <summary>
+        /// Every label's Click event is handled by this event handler
+        /// </summary>
+        /// <param name="sender">The label that was clicked</param>
+        /// <param name="e"></param>
         private void label1_Click(object sender, EventArgs e)
         {
+            Label clickedLabel = sender as Label;
 
+            if (clickedLabel != null)
+            {
+                // If the clicked label is black, the player clicked
+                // an icon that's already been revealed --
+                // ignore the click
+                if (clickedLabel.ForeColor == Color.Black)
+                    return;
+
+                clickedLabel.ForeColor = Color.Black;
+            }
         }
     }
 }
